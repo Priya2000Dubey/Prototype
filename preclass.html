@@ -1,0 +1,121 @@
+<!-- In today's class we will learn what is prototype means in a real world and then connecting that knowledge with how Js works?
+prototype = object, function
+
+    Q. What is Prototype of object?
+Ans.= An original model on which something is patterned. This is a way of creating object from another object.
+      Every type of object have it's own prototype.
+
+
+<script>
+    let obj = {
+    name: "bike",
+}
+console.log("obj:", obj)
+
+</script>
+
+ =Prototype and Inheritance -->
+<!-- Prototype is a way of creating object using another object and syntax of this is Object.create.
+    proto just points to original moder(prototype) from which it is built form.
+    In Js, a prototype can also have a prototype hence creating a prototype chain.
+    In Js, it's better to borrow, than own a property or method.
+    Using Prototype we can create a blueprint from which we can borrow.
+
+= Simple object using another object = -->
+ <!-- <script>
+    let obj = {
+    name: "bike",
+}
+    let objectB = Object.create(obj)
+    console.log("objectB:", objectB)
+    let object2 = Object.create(obj)
+    console.log("object2", object2)
+ </script>
+
+Q. What is Inheritance?
+Ans.= One object gets access to properties and methods of other object. Js has Prototypal Inheritance. -->
+
+<!-- <script>
+    let family = {
+    father: "Krishna",
+    myFather() {
+        console.log(this.father);
+    }
+}
+    let son = Object.create(family)
+    console.log(son.myFather());
+</script>
+
+=Js has Prototypal Inheritance.We can use Js prototypal inheritance in two ways-
+1.Function Constructors=  -->
+<!-- <script>
+    function Person(n, a)
+    {
+        this.name = n
+        this.age = a
+    }
+
+    let person1 = new Person("Raj", 23)
+    // console.log("person1", person1);
+    Person.prototype.city = function (c) {
+        this.city = c
+    }
+    // console.log("person1", person1.city);
+    person1.city("Mumbai");
+    console.log("person1", person1.city);
+
+
+
+</script>
+ 2.Object.create() method= -->
+
+
+<!-- =hasOwnProperty() = the hasOwnProperty() method is JavaScript is used to check whether the object has the specified
+                    property as its own property.This is useful for checking if the object has inherited the property rather than being it's own. --> 
+
+<!-- <script>
+let a = {
+    name: "Ruby"
+}
+
+let b = Object.create(a)
+b.age=23
+console.log(b.hasOwnProperty("name"))
+console.log(b.hasOwnProperty("age"))
+</script> -->
+<!-- 
+=Everything in JavaScript is an object, but how?
+Ans.= Js has an object as its base prototype. From that, it creates other data types and methods that we can use on them. It's just how Js was decided to be built. -->
+
+<!-- For function = function prototype --- object prototype --- null
+<script>
+    function b(){
+        return true;
+    }
+console.log(b.__proto__.__proto__.__proto__)
+</script>
+
+For array =  -->
+<script>
+    let arr = [1,2,3]
+Array.prototype.myPrint = function(){
+    console.log("hacked array");
+}
+arr.myPrint()
+</script>
+
+
+
+<!-- <w3school>
+Prototype= All JavaScript objects inherit properties and methods from a prototype.
+               सभी जावास्क्रिप्ट ऑब्जेक्ट एक प्रोटोटाइप से गुण और विधियाँ प्राप्त करते हैं।
+                             
+Date objects inherit from Date.prototype
+Array objects inherit from Array.prototype
+Person objects inherit from Person.prototype
+The Object.prototype is on the top of the prototype inheritance chain: Date objects, Array objects, and Person objects inherit from Object.prototype.
+</w3school> -->
+
+
+
+
