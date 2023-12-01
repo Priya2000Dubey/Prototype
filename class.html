@@ -1,0 +1,185 @@
+<!-- =Inheritance= -->
+<!-- <script>
+    let arr = [1,2,3,4,5];
+    arr.pop();
+    let arr2 = [6,7,8,9,,];
+    arr2.pop();
+    console.log(arr);
+    console.log(arr2);
+</script>
+Above array are same, because of it's prototype, we are not talking about here values,values may be differ.
+array and objects --- by reference/address -->
+<!-- <script>
+    let obj = {
+    value: 10,
+}
+let obj2 = obj;
+obj2.value =15;
+console.log(obj.value);
+</script>
+Everything in JavaScript is an object and every object in JavaScript has its own prototype. -->
+<!-- <script>
+    let person = {
+        name: "Rajesh"
+    }
+    console.log(person);
+</script>
+
+=Prototype Chain=
+object -- prototype -- prototype -- prototype -- null -->
+<!-- <script>
+    let arr = new Array(1,2,3,4);
+    let arr2 = [1,2,3,4];
+    console.log(arr.__proto__ === arr2.__proto__);
+</script> -->
+
+<!-- <script>
+    let obj = new Object();
+    let obj2 = {};
+    console.log(obj.__proto__ === obj2.__proto__);
+    console.log(Object.prototype.__proto__ === null);
+</script> -->
+<!-- <script>
+    console.log(Object.prototype.__proto__);
+</script> -->
+
+<!-- <script>
+    function sum(a,b){
+        return a + b;
+    }
+    console.log(sum);
+    
+    let fun = new Function();
+</script> -->
+
+<!-- =Creating our own prototype chain=
+We can create our own prototype. We can establish connection between prototype like friends. For that the syntax is Object.setPrototypeof() -->
+<!-- Every object has parent prototype, it will not go anywhere. When we search prototype, it will not got for infinite, it will go to null.
+<script>
+    let suraj = {
+        name: "Suraj",
+        headphone: "Boat",
+    };
+    let dhanush = {
+        name: "Dhanush",
+        bike: "Pulsar",
+    };
+    let nitish = {
+        name: "Nitish",
+        car: "Hyundai",
+    }
+    Object.setPrototypeOf(suraj, dhanush);
+    console.log(suraj);
+    Object.setPrototypeOf(dhanush, nitish);
+    console.log(suraj.name);
+
+</script> -->
+
+<!-- =Where can we use prototype=
+<script>
+    let nitish = {
+    name: "Nitish",
+    car: "Hyundai",
+};
+let dhanush = Object.create(nitish);
+dhanush.name = "Dhanush";
+dhanush.bike = "Pulsar";
+
+let suraj = Object.create(dhanush);
+suraj.name = "Suraj";
+suraj.headPhone = "Boat";
+console.log(suraj);
+</script> -->
+
+<!-- <script>
+function CreateAccount (balance, acc_no, name) {
+    this.balance = balance;
+    this.acc_no = acc_no;
+    this.name = name;
+};
+
+function DmatAccount (stock, balance) {
+    this.stock = stock;
+    this.balance = balance;
+};
+
+function CurrAccount(balance, stock) {
+    this.stock = stock;
+    this.balance = balance;
+};
+
+function printBalance() {
+    console.log(`Balance: ${this.balance}`);
+};
+
+CreateAccount.prototype.print = printBalance;
+DmatAccount.prototype.print = printBalance;
+CurrAccount.prototype.print = printBalance;
+
+let a1 = new CreateAccount (1234, 5678, "Priya");
+let a2 = new CreateAccount (5445, 5588, "Aadhya")
+let a3 = new CreateAccount (8596, 6897, "Sanskriti")
+console.log(a1);
+console.log(a2);
+console.log(a3);
+
+
+let d1 = new DmatAccount ("Nifty-50", 12000);
+let c1 = new CurrAccount (15000);
+// a1.print();
+// d1.print();
+// c1.print();
+</script> -->
+
+<!-- =Factory Function= -->
+<!-- <script>
+    function createAccount(balance, acc_no, name) {
+        let obj = {
+        balance: balance,
+        acc_no: acc_no,
+        name: name,
+    }
+    return obj;
+    }
+    
+    function printMethod() {
+        let obj = {
+            print : function() {
+        console.log(`Balance: ${this.balance}`);
+    },
+
+        };
+      return obj;
+    }
+
+    
+    Object.setPrototypeOf(createAccount.prototype, printMethod.prototype);
+    let a1 = createAccount(10000, 8479635, "Dhansush");
+    let p = new printMethod();
+    // Object.setPrototypeOf(a1,p);
+    console.log(a1);
+    a1.print;
+</script> -->
+
+<script>
+    function Person(firstName, lastName, age) {
+        let obj = {};
+        obj.firstName = firstName;
+        obj.lastName = lastName;
+        obj.age = age;
+        return obj;
+    }
+
+    function Employee(firstName, lastName, age, department, salary) {
+        let obj = Person(firstName, lastName, age);
+        Object.setPrototypeOf(obj, Employee.prototype);
+        obj.department = department;
+        obj.salary = salary;
+        return obj;
+    };
+    let e1 = Employee("John", "Doe", 25, "Engineering", 200000);
+    console.log(e1);
+</script>
+
+You can inharit properties properties by using (1)setPrototypeOf and (2).create
+Add prototype to CF, Add prototype to Factory Function.
